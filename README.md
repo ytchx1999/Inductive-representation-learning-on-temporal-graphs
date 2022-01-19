@@ -66,10 +66,10 @@ scikit_learn==0.22.1
 * Learning the network using link prediction tasks
 ```{bash}
 # t-gat learning on wikipedia data
-python -u learn_edge.py -d wikipedia --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
+python3 -u learn_edge.py -d wikipedia --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 
 # t-gat learning on reddit data
-python -u learn_edge.py -d reddit --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
+python3 -u learn_edge.py -d reddit --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 ```
 
 * Learning the down-stream task (node-classification)
@@ -78,10 +78,10 @@ Node-classification task reuses the network trained previously. Make sure the `p
 
 ```{bash}
 # on wikipedia
-python -u learn_node.py -d wikipedia --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
+python3 -u learn_node.py -d wikipedia --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 
 # on reddit
-python -u learn_node.py -d reddit --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
+python3 -u learn_node.py -d reddit --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 ```
 #### General flags
 

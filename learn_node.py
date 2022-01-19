@@ -15,6 +15,9 @@ from sklearn.metrics import roc_auc_score
 from module import TGAN
 from graph import NeighborFinder
 
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 class LR(torch.nn.Module):
     def __init__(self, dim, drop=0.3):
