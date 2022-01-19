@@ -68,11 +68,13 @@ scikit_learn==0.22.1
 # t-gat learning on wikipedia data
 python3 -u learn_edge.py -d wikipedia --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 # or
+cd scripts/
 bash train_edge_wiki.sh
 
 # t-gat learning on reddit data
 python3 -u learn_edge.py -d reddit --bs 200 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 # or
+cd scripts/
 bash train_edge_reddit.sh
 ```
 
@@ -84,11 +86,13 @@ Node-classification task reuses the network trained previously. Make sure the `p
 # on wikipedia
 python3 -u learn_node.py -d wikipedia --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 # or
+cd scripts/
 bash train_node_wiki.sh
 
 # on reddit
 python3 -u learn_node.py -d reddit --bs 100 --uniform  --n_degree 20 --agg_method attn --attn_mode prod --gpu 0 --n_head 2 --prefix hello_world
 # or
+cd scripts/
 bash train_node_reddit.sh
 ```
 #### General flags
