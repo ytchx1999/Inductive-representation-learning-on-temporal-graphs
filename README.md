@@ -1,34 +1,4 @@
 # Inductive Representation Learning on Temporal Graphs (ICLR 2020)
-<!--#### -->
-#### Authors: Da Xu*, Chuanwei Ruan*, Sushant Kumar, Evren Korpeoglu,  Kannan Achan
-#### Please contact Da.Xu@walmartlabs.com or Chuanwei.Ruan@walmartlabs.com for questions.
-
-#### Follow-up work:
-
-<ul>
-  <li> <b>A Temporal Kernel Approach for Deep Learning with Continuous-time Information, ICLR 2021</b> (https://arxiv.org/abs/2103.15213)
-</ul>
-
-#### Predecessor work:
-<ul>
-  <li> <b>Self-attention with Functional Time Representation Learning, NeurIPS 2019</b> (https://arxiv.org/abs/1911.12864)
-</ul>
-
-## Introduction
-
-The evolving nature of temporal dynamic graphs requires handling new nodes as well as capturing temporal patterns. The node embeddings, as functions of time, should represent both the static node features and the evolving topological structures. 
-
-We propose the temporal graph attention (TGAT) layer to efficiently aggregate temporal-topological neighborhood features as well as to learn the time-feature interactions. Stacking TGAT layers, the network recognizes the node embeddings as functions of time and is able to inductively infer embeddings for both new and observed nodes as the graph evolves. 
-
-The proposed approach handles both node classification and link prediction task, and can be naturally extended to include the temporal edge features.
-
-
-#### Paper link: [Inductive Representation Learning on Temporal Graphs](https://openreview.net/pdf?id=rJeW1yHYwH)
-
-![architecture](architecture.png?raw=true "Network architecture")
-
-### Self-attention with functional representation learning
-The theoretical arguments developed in this paper are from our concurrent work: [Self-attention with Functional Time Representation Learning (NeurIPS 2019)](https://arxiv.org/abs/1911.12864). The implementation is also available at the [github page](https://github.com/StatsDLMathsRecomSys/Self-attention-with-Functional-Time-Representation-Learning).
 
 ## Running the experiments
 
@@ -38,11 +8,27 @@ The theoretical arguments developed in this paper are from our concurrent work: 
 * [Reddit](http://snap.stanford.edu/jodie/reddit.csv)
 
 * [Wikipedia](http://snap.stanford.edu/jodie/wikipedia.csv)
+  
+```bash
+cd processed/
+wget http://snap.stanford.edu/jodie/reddit.csv
+wget http://snap.stanford.edu/jodie/wikipedia.csv
+```
+
+| user_id | item_id | timestamp | state_label | **comma_separated_list_of_features** |
+|:-:|:-:|:-:|:-:|:-:|
+| user id | item id | float类型的时间 | 每当用户状态发生变化时，状态标签应为1，否则为0 | 边特征 |
+
+|  | Reddit | Wikipedia |
+|:-:|:-:|:-:|
+| #nodes (user+item) | 8227 | 10984 |
+| edge feature | (157474, 172) | (672447, 172) |
+
 
 #### Preprocess the data
 We use the dense `npy` format to save the features in binary format. If edge features or nodes features are absent, it will be replaced by a vector of zeros. 
 ```{bash}
-python process.py 
+python3 process.py 
 ```
 
 #### Use your own data
@@ -122,6 +108,39 @@ optional arguments:
                         how to use time information
   --uniform             take uniform sampling from temporal neighbors
 ```
+
+<!--#### -->
+#### Authors: Da Xu*, Chuanwei Ruan*, Sushant Kumar, Evren Korpeoglu,  Kannan Achan
+#### Please contact Da.Xu@walmartlabs.com or Chuanwei.Ruan@walmartlabs.com for questions.
+
+#### Follow-up work:
+
+<ul>
+  <li> <b>A Temporal Kernel Approach for Deep Learning with Continuous-time Information, ICLR 2021</b> (https://arxiv.org/abs/2103.15213)
+</ul>
+
+#### Predecessor work:
+<ul>
+  <li> <b>Self-attention with Functional Time Representation Learning, NeurIPS 2019</b> (https://arxiv.org/abs/1911.12864)
+</ul>
+
+## Introduction
+
+The evolving nature of temporal dynamic graphs requires handling new nodes as well as capturing temporal patterns. The node embeddings, as functions of time, should represent both the static node features and the evolving topological structures. 
+
+We propose the temporal graph attention (TGAT) layer to efficiently aggregate temporal-topological neighborhood features as well as to learn the time-feature interactions. Stacking TGAT layers, the network recognizes the node embeddings as functions of time and is able to inductively infer embeddings for both new and observed nodes as the graph evolves. 
+
+The proposed approach handles both node classification and link prediction task, and can be naturally extended to include the temporal edge features.
+
+
+#### Paper link: [Inductive Representation Learning on Temporal Graphs](https://openreview.net/pdf?id=rJeW1yHYwH)
+
+![architecture](architecture.png?raw=true "Network architecture")
+
+### Self-attention with functional representation learning
+The theoretical arguments developed in this paper are from our concurrent work: [Self-attention with Functional Time Representation Learning (NeurIPS 2019)](https://arxiv.org/abs/1911.12864). The implementation is also available at the [github page](https://github.com/StatsDLMathsRecomSys/Self-attention-with-Functional-Time-Representation-Learning).
+
+
 
 ## Cite us
 

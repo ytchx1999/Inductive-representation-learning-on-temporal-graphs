@@ -42,7 +42,7 @@ def reindex(df):
     assert(df.i.max() - df.i.min() + 1 == len(df.i.unique()))
     
     upper_u = df.u.max() + 1
-    new_i = df.i + upper_u
+    new_i = df.i + upper_u  # user和item统一编址id
     
     new_df = df.copy()
     print(new_df.u.max())
@@ -82,6 +82,6 @@ def run(data_name):
     np.save(OUT_NODE_FEAT, rand_feat)
     
     
-run('wikipedia')
+# run('wikipedia')
 
-#run('reddit')
+run('reddit')
