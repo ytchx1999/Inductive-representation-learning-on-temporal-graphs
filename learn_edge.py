@@ -20,6 +20,7 @@ from graph import NeighborFinder
 from utils import EarlyStopMonitor, RandEdgeSampler
 
 import os
+from tqdm import tqdm
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 ### Argument and global variables
@@ -93,7 +94,7 @@ def eval_one_epoch(hint, tgan, sampler, src, dst, ts, label):
         TEST_BATCH_SIZE=30
         num_test_instance = len(src)
         num_test_batch = math.ceil(num_test_instance / TEST_BATCH_SIZE)
-        for k in range(num_test_batch):
+        for k in tqdm(range(num_test_batch), desc="test"):
             # percent = 100 * k / num_test_batch
             # if k % int(0.2 * num_test_batch) == 0:
             #     logger.info('{0} progress: {1:10.4f}'.format(hint, percent))
@@ -198,7 +199,7 @@ adj_list = [[] for _ in range(max_idx + 1)]
 for src, dst, eidx, ts in zip(train_src_l, train_dst_l, train_e_idx_l, train_ts_l):
     adj_list[src].append((dst, eidx, ts))
     adj_list[dst].append((src, eidx, ts))
-train_ngh_finder = NeighborFinder(adj_list, uniform=UNIFORM)
+train_ngh_finder = NeighborFinder(adj_list, uniform=UNIFORM)  #
 
 # full graph with all the data for the test and validation purpose
 full_adj_list = [[] for _ in range(max_idx + 1)]
@@ -207,7 +208,7 @@ for src, dst, eidx, ts in zip(src_l, dst_l, e_idx_l, ts_l):
     full_adj_list[dst].append((src, eidx, ts))
 full_ngh_finder = NeighborFinder(full_adj_list, uniform=UNIFORM)
 
-train_rand_sampler = RandEdgeSampler(train_src_l, train_dst_l)
+train_rand_sampler = RandEdgeSampler(train_src_l, train_dst_l)  #
 val_rand_sampler = RandEdgeSampler(src_l, dst_l)
 nn_val_rand_sampler = RandEdgeSampler(nn_val_src_l, nn_val_dst_l)
 test_rand_sampler = RandEdgeSampler(src_l, dst_l)
@@ -218,7 +219,7 @@ nn_test_rand_sampler = RandEdgeSampler(nn_test_src_l, nn_test_dst_l)
 device = torch.device('cuda:{}'.format(GPU))
 tgan = TGAN(train_ngh_finder, n_feat, e_feat,
             num_layers=NUM_LAYER, use_time=USE_TIME, agg_method=AGG_METHOD, attn_mode=ATTN_MODE,
-            seq_len=SEQ_LEN, n_head=NUM_HEADS, drop_out=DROP_OUT, node_dim=NODE_DIM, time_dim=TIME_DIM)
+            seq_len=SEQ_LEN, n_head=NUM_HEADS, drop_out=DROP_OUT, node_dim=NODE_DIM, time_dim=TIME_DIM)  #
 optimizer = torch.optim.Adam(tgan.parameters(), lr=LEARNING_RATE)
 criterion = torch.nn.BCELoss()
 tgan = tgan.to(device)
@@ -239,7 +240,7 @@ for epoch in range(NUM_EPOCH):
     acc, ap, f1, auc, m_loss = [], [], [], [], []
     np.random.shuffle(idx_list)
     logger.info('start {} epoch'.format(epoch))
-    for k in range(num_batch):
+    for k in tqdm(range(num_batch), desc="train"):
         # percent = 100 * k / num_batch
         # if k % int(0.2 * num_batch) == 0:
         #     logger.info('progress: {0:10.4f}'.format(percent))

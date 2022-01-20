@@ -21,7 +21,7 @@ wget http://snap.stanford.edu/jodie/wikipedia.csv
 
 |  | Reddit | Wikipedia |
 |:-:|:-:|:-:|
-| #nodes (user+item) | 10984 | 8227 |
+| node feature (user+item) | (10985, 172) | (9228, 172) |
 | edge feature | (672447, 172) | (157474, 172) |
 
 
